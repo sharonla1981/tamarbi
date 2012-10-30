@@ -34,8 +34,6 @@ local.properties
 
 assets/
 protected/runtime/
-js/
-css/
 
 #################
 ## Visual Studio
