@@ -369,37 +369,21 @@ class ParGeneralRecController extends Controller
         public function actionCreateParamItemListAjax()
         {
             
-            if (Yii::app()->request->isAjaxRequest && isset($_GET['filter_value']) && isset($_GET['param_name'])
-                        && isset($_GET['filter_field'])
-                    )
+            if (Yii::app()->request->isAjaxRequest && isset($_GET['param_name']))      
             {
                 
-                $filter_field = $_GET['filter_field'];
-                $filter_value = $_GET['filter_value'];
+                
+                $level1FilterSQL = isset($_GET['level1Filter']) ? "AND param_value LIKE"."'%".$_GET['level1Filter']."%'" : "";
+                $level2SelectedSQL = isset($_GET['level2Selected']) ? "AND sub_param_id=".$_GET['level2Selected'] : "";
                 $param_name = $_GET['param_name'];
-                $searchType = $_GET['search_type'];
                 $levelsSQL = "";
                 
-                if($filter_value != '')
-                {
-                    $levelsSQL = "SELECT id,param_id,param_value,param_heb_name,sub_param_id FROM par_general_rec
+                $levelsSQL = "SELECT id,param_id,param_value,param_heb_name,sub_param_id FROM par_general_rec
                                             WHERE param_name = '%s'
-                                            AND %s %s";
-                    
-                    $levelsSQL = sprintf($levelsSQL,$param_name,$filter_field,$searchType);
-                    $levelsSQL.= "'%".$filter_value."%'";
-                }
-                else
-                {
-                    $levelsSQL = "SELECT id,param_id,param_value,param_heb_name,sub_param_id FROM par_general_rec
-                                            WHERE param_name = '%s'";
-                                            
-                    
-                     $levelsSQL = sprintf($levelsSQL,$param_name);
-                     //$levelsSQL.= " LIMIT 500";
-                                           
-                }
-                
+                                            %s 
+                                            %s;";
+     
+                $levelsSQL = sprintf($levelsSQL,$param_name,$level1FilterSQL,$level2SelectedSQL);
                
                 $dataProvider=new CSqlDataProvider($levelsSQL, array(
                                         'keyField'=>'param_id',

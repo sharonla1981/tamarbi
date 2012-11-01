@@ -106,4 +106,11 @@ class ParGeneralRec extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function paramScreenPanel()
+	{
+		$model = ParGeneralRec::model()->findAll(array('select'=>'t.param_heb_name,t.param_name','group'=>'t.param_name','distinct'=>true,'condition'=>'NOT ISNULL(t.sub_param_name)'));
+
+		return $model;
+	}
 }

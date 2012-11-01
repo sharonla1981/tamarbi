@@ -74,16 +74,15 @@ $this->widget('zii.widgets.grid.CGridView', array(
          */
         $("#paramLevel2Filter > ul").selectable({
             selected: function(){
-                //var lev2Selected = $('li.ui-selected').attr('paramId');
+                var lev2Selected = $('li.ui-selected').attr('paramId');
                 var param_name = $(this).attr('paramName');
                 
-                CreateParamLevel1List(param_name);
+                //CreateParamLevel1List(param_name, "sub_param_id","=", lev2Selected);
             }
         });
         
         
         //make the level2 param list float
-        //var yFloat = Math.min($("#paramLevel1").top,($("#paramLevel1").top / 2));
         $("#paramLevel2").makeFloat({x:"current",y:"current"});
         //update the param list when a param level1 is dropped on a param level2 item
         $("ul.droptrue > li").droppable({
@@ -130,15 +129,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
         
         function CreateParamLevel1List(param_name)
         {
-            /**
-             *	fiter by 2 options:
-             *	1: the user selected level2 item
-             *	2: the user typed level1 item name
-             **/
             var level2Selected = $("#paramLevel2Filter > ul > li.ui-selected").attr("paramId");
             var level1Filter = $("#filterParamLevel1").val();
             
-             
+             //alert(filter_value);
              $.ajax({
                     url: "index.php?r=parGeneralRec/createParamItemListAjax",
                     type: "GET",

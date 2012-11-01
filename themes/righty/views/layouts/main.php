@@ -17,8 +17,7 @@
 	<!--Theme
 	<link href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" /> -->
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/wijmo/jquery-wijmo.css" />
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/easyui/themes/default/easyui.css" />
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/easyui/themes/icon.css" />
+       
         
 	<!--Wijmo Widgets CSS
 	<link href="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.0.0.min.css" rel="stylesheet" type="text/css" /> -->
@@ -36,24 +35,46 @@
 	<div id="header">
             <div id="logo"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/header_tamar.jpg" width=1100px /></div>
 	</div><!-- header -->
-        <hr />
+     
+       <?php 
+                $model = ParGeneralRec::model()->paramScreenPanel();
+                $items = array();
+                foreach ($model as $param)
+                {
+                    $items[] = array('label'=>$param->getAttribute('param_heb_name'),'url'=>array('parGeneralRec/paramScreen&param_name='.$param->getAttribute('param_name')));
+                }
+       
+       ?>
+        <div id="wijMenu">
+            <?php 
+                
+            ?>
+        </div>
         <?php /*
-	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
+        <div id="mainMbMenu">
+		<?php $this->widget('ext.mbmenu.MbMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
+                            array('label'=>'בית', 'url'=>array('/site/index')),
+                            array(
+                                'label'=>'פעולות עדכון',
+                                'items'=>$items,
+                            )
+                            
+                            ),array(
+				array('label'=>'בית', 'url'=>array('/site/index')),
+				array('label'=>'פעולות', 'url'=>array('/site/page', 'view'=>'about')),
+				array('label'=>'עדכון נתונים', 'url'=>array('/site/contact')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); ?>
+				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest) 
+			), 
+		));  ?>
+        */ ?>
 	</div><!-- mainmenu -->
         
-	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+	<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
 		'links'=>$this->breadcrumbs,
-	)); ?><!-- breadcrumbs -->
-        */ ?>
+	));*/ ?><!-- breadcrumbs -->
+       
 
 	<?php echo $content; ?>
 	<div id="footer">
