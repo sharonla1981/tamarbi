@@ -22,7 +22,7 @@
 	<!--Wijmo Widgets CSS
 	<link href="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.0.0.min.css" rel="stylesheet" type="text/css" /> -->
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/wijmo/jquery.wijmo-complete.all.2.0.0.min.css" />
-	
+	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/js/fancy-menu/js/lavalamp.js"); ?>
 	
 	
 	
@@ -45,11 +45,24 @@
                 }
        
        ?>
-        <div id="wijMenu">
-            <?php 
-                
-            ?>
-        </div>
+        
+        <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/js/fancy-menu/js/lavalamp.js"); ?>
+        <div class="lavalamp" >
+    <ul>
+        <li class="active"><a href="">Home</a></li>
+        <li><a href="">About</a></li>
+        <li><a href="">Blog</a></li>
+        <li><a href="">Services</a></li>
+        <li><a href="">Portfolio</a></li>
+        <li><a href="">Contacts</a></li>
+        <li><a href="">Back to Article</a></li>
+        <li><a href="">How it Works?</a></li>
+    </ul>
+        <div class="floatr"></div>
+    </div>
+
+        
+</div>
         <?php /*
         <div id="mainMbMenu">
 		<?php $this->widget('ext.mbmenu.MbMenu',array(
