@@ -15,14 +15,14 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 	
 	<!--Theme
-	<link href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" /> -->
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/wijmo/jquery-wijmo.css" />
+	<link href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" /> 
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/wijmo/jquery-wijmo.css" /> -->
+        
        
         
 	<!--Wijmo Widgets CSS
-	<link href="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.0.0.min.css" rel="stylesheet" type="text/css" /> -->
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/wijmo/jquery.wijmo-complete.all.2.0.0.min.css" />
-	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/js/fancy-menu/js/lavalamp.js"); ?>
+	<link href="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.0.0.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/wijmo/jquery.wijmo-complete.all.2.0.0.min.css" /> -->
 	
 	
 	
@@ -46,19 +46,130 @@
        
        ?>
         
-        <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/js/fancy-menu/js/lavalamp.js"); ?>
-        <div class="lavalamp" >
-    <ul>
-        <li class="active"><a href="">Home</a></li>
-        <li><a href="">About</a></li>
-        <li><a href="">Blog</a></li>
-        <li><a href="">Services</a></li>
-        <li><a href="">Portfolio</a></li>
-        <li><a href="">Contacts</a></li>
-        <li><a href="">Back to Article</a></li>
-        <li><a href="">How it Works?</a></li>
-    </ul>
-        <div class="floatr"></div>
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/superfish-rtl-jqueryui/css/superfish.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/superfish-rtl-jqueryui/css/superfish-rtl.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/superfish-rtl-jqueryui/css/superfish-vertical.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/superfish-rtl-jqueryui/css/superfish-vertical-rtl.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/superfish-rtl-jqueryui/css/superfish-navbar-rtl.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/js/superfish-rtl-jqueryui/css/superfish-navbar.css" />
+        <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/js/superfish-rtl-jqueryui/js/hoverIntent.js"); ?>
+        <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/js/superfish-rtl-jqueryui/js/superfish.js"); ?>
+        <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/js/superfish-rtl-jqueryui/js/superfish.js"); ?>
+	
+        <script type="text/javascript">
+            	jQuery(function(){
+	            jQuery('ul.sf-menu').superfish();
+	            
+	            $("ul.sf-menu li").addClass("ui-state-default");
+	
+	            $("ul.sf-menu li").hover(function () { $(this).addClass('ui-state-hover'); },
+	                                     function () { $(this).removeClass('ui-state-hover'); });
+	
+	        });
+
+        </script>
+        <div class="rtl">
+    <ul class="sf-menu">
+			<li class="current">
+				<a href="#a">menu item</a>
+				<ul>
+					<li>
+						<a href="#aa">menu item that is quite long</a>
+					</li>
+					<li class="current">
+						<a href="#ab">menu item</a>
+						<ul>
+							<li class="current"><a href="#">menu item</a></li>
+							<li><a href="#aba">menu item</a></li>
+							<li><a href="#abb">menu item</a></li>
+							<li><a href="#abc">menu item</a></li>
+							<li><a href="#abd">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">menu item</a>
+			</li>
+			<li>
+				<a href="#">menu item</a>
+				<ul>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">short</a></li>
+							<li><a href="#">short</a></li>
+							<li><a href="#">short</a></li>
+							<li><a href="#">short</a></li>
+							<li><a href="#">short</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">menu item</a>
+			</li>	
+		</ul>
     </div>
 
         

@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="image/x-icon" href="http://rtl-this.com/favicon.ico" rel="shortcut icon">
+<title>RTLing Superfish Menu (jQuery Plugin) Example | RTL This</title>
+<style type="text/css">
+
+.rtl {direction:rtl;}
+</style>
+
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.23.custom.css" media="screen">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="css/superfish.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="css/superfish-rtl.css" media="screen">
+
+		<link rel="stylesheet" type="text/css" href="css/superfish-vertical.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="css/superfish-vertical-rtl.css" media="screen">
+		
+		<link rel="stylesheet" type="text/css" href="css/superfish-navbar.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="css/superfish-navbar-rtl.css" media="screen">
+
+		<script type="text/javascript" src="js/hoverIntent.js"></script>
+		<script type="text/javascript" src="js/superfish.js"></script>
+		<script type="text/javascript">
+
+		// initialise plugins
+	        jQuery(function(){
+	            jQuery('ul.sf-menu').superfish();
+	            
+	            $("ul.sf-menu li").addClass("ui-state-default");
+	
+	            $("ul.sf-menu li").hover(function () { $(this).addClass('ui-state-hover'); },
+	                                     function () { $(this).removeClass('ui-state-hover'); });
+	
+	        });
+
+		</script>
+		
+
+</head>
+
+<body>
+<p>Add the classes "vertical" or "navbar" to the UL (with class "sf-menu") to use other styles.</p>
+<p>You can find the Tutorial at <a href="http://rtl-this.com/tutorial/rtling-superfish-menu-jquery-plugin"><span>http://rtl-this.com/tutorial/rtling-superfish-menu-jquery-plugin</span></a>
+</p>
+<div class="rtl">
+
+		<ul class="sf-menu sf-vertical">
+			<li class="current">
+				<a href="#a">menu item</a>
+				<ul>
+					<li>
+						<a href="#aa">menu item that is quite long</a>
+					</li>
+					<li class="current">
+						<a href="#ab">menu item</a>
+						<ul>
+							<li class="current"><a href="#">menu item</a></li>
+							<li><a href="#aba">menu item</a></li>
+							<li><a href="#abb">menu item</a></li>
+							<li><a href="#abc">menu item</a></li>
+							<li><a href="#abd">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">menu item</a>
+			</li>
+			<li>
+				<a href="#">menu item</a>
+				<ul>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">short</a></li>
+							<li><a href="#">short</a></li>
+							<li><a href="#">short</a></li>
+							<li><a href="#">short</a></li>
+							<li><a href="#">short</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">menu item</a>
+						<ul>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+							<li><a href="#">menu item</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">menu item</a>
+			</li>	
+		</ul>
+
+		
+</div>
+</body>
+
+</html>
