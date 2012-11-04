@@ -25,17 +25,13 @@
 			}
 			
 	?>
-	<?php	$this->widget('zii.widgets.jui.CJuiAccordion', array(
+	<?php	/*$this->widget('zii.widgets.jui.CJuiAccordion', array(
 					'id'=>'rightPanel',
-                    'panels'=>/*array(
-					'פעולות'=>CHtml::link('נתוני מקורות','index.php?r=MkorotGauge/index'),*/
+                    'panels'=>
 					 $panelsArray,
 					 					
-                    //'פעולות נוספות'=>Yii::app()->
-                    // panel 3 contains the content rendered by a partial view
-                    //'panel 3'=>$this->renderPartial('_partial',null,true),
                     
-                    // additional javascript options for the accordion plugin
+                    
                     'options'=>array(
                         'animated'=>'bounceslide',              
 						'change'=>'js:function(event, ui) {
@@ -49,7 +45,7 @@
 	
 			
 			
-			
+		*/	
         ?>
 		</p>
 
@@ -60,12 +56,12 @@
 <script type="text/javascript">       
 
 //fix the accordion problem which makes the scroll bars appeare 
-$("#rightPanel").accordion({
+/*$("#rightPanel").accordion({
     'fillSpace': true,
     collapsible: true,
     //set a cookie that will hold the index of the last opened pane 
     active: ($.cookie("saved_index") == null) ? 0 : ($.cookie("saved_index") == "false") ? false : parseInt($.cookie("saved_index")), 
     
-});
+});*/
 
 </script>

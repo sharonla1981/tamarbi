@@ -42,20 +42,20 @@ return array(
                   'widgetFactory' => array(
                       'widgets' => array(
                           'CJuiAutoComplete' => array(
-                              'themeUrl' => 'css/jqueryui',
-                              'theme' => 'redmond',
+                              'themeUrl' => 'protected/vendors/jqueryui',
+                              'theme' => 'start',
                           ),
                           'CJuiDialog' => array(
-                              'themeUrl' => 'css/jqueryui',
-                              'theme' => 'redmond',
+                              'themeUrl' => 'protected/vendors/jqueryui',
+                              'theme' => 'start',
                           ),
                           'CJuiDatePicker' => array(
-                              'themeUrl' => 'css/jqueryui',
-                              'theme' => 'redmond',
+                             'themeUrl' => 'protected/vendors/jqueryui',
+                              'theme' => 'start',
                           ),
                           'CJuiAccordion' => array(
-                              'themeUrl' => 'css/jqueryui',
-                              'theme' => 'redmond',
+                              'themeUrl' => 'protected/vendors/jqueryui',
+                              'theme' => 'start',
                           ),
                       ),
                   ),
