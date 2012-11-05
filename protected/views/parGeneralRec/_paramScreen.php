@@ -25,7 +25,8 @@ $level1data = $level1dataProvider->getData();
 $level2data = $level2dataProvider->getData();
 $level3data = $level3dataProvider->getData();
 
-$this->widget('zii.widgets.grid.CGridView', array(
+//$this->widget('zii.widgets.grid.CGridView', array(
+/*$this->widget('ext.NGridView2.NGridView', array(
 				'id'=>'paramView',
 				'dataProvider'=>$dataProvider,
 				'pager' => array('cssFile' => Yii::app()->baseUrl . '/css/gridView2.css'),
@@ -46,8 +47,57 @@ $this->widget('zii.widgets.grid.CGridView', array(
                                                                         'htmlOptions'=>array('class'=>'droptrue','name'=>$dataP[0]["lev2Id"],'level'=>'2')
 									),
 						),
-			));
+			)); */
 ?>
+
+<?php
+$this->widget('application.vendors.kendoui.widgets.KGrid', array(
+		'dataSource' => array('data'=>$dataP,
+	        
+			'pageSize' => 20,
+		),
+	    'height' => 360,
+	    'groupable' => true,
+	    'scrollable' => true,
+	    'sortable' => true,
+	    'pageable' => true,
+          //  'editable' => true,
+            'selectable' => true,
+            'navigatable' => true,
+            'toolbar' => 'js: create',
+	    'columns' => array(
+	    	array(
+	            'field' => "lev2Val",
+	            'width' => 90,
+	            'title' => $dataP[0]['lev2Title'],
+	        ),
+	    	array(
+	            'field' => "lev1Val",
+	            'width' => 90,
+	            'title' => $dataP[0]['lev1Title'],
+	        ),/*
+	    	array(
+	            'width' => 100,
+	            'field' => 'City',
+	        ),
+	    	array(
+	            'field' => 'Title',
+	        ),
+	    	array(
+	            'field' => 'BirthDate',
+	            'title' => 'Birth Date',
+	            'template' => "#= kendo.toString(BirthDate,'dd MMMM yyyy') #",
+	        ),
+	    	array(
+	            'width' => 50,
+	            'field' => 'Age',
+	        ),*/
+	    ),
+		'htmlOptions' => array('id' => 'grid'),
+	)
+);
+?>
+
 
 <script type="text/javascript">
     $(function() {
@@ -84,7 +134,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         
         //make the level2 param list float
         //var yFloat = Math.min($("#paramLevel1").top,($("#paramLevel1").top / 2));
-        $("#paramLevel2").makeFloat({x:"current",y:"current"});
+        //$("#paramLevel2").makeFloat({x:"current",y:"current"});
         //update the param list when a param level1 is dropped on a param level2 item
         $("ul.droptrue > li").droppable({
             drop: function(event,ui){
@@ -127,6 +177,21 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 
             }
         })
+        
+        $('thead > tr > th').click(function (){
+          
+            
+            if ($('.filter').length == 0)
+            {  
+                $(this).parent().parent().append('<tr class="filter"></tr>')
+                $('thead > tr').each(function(){
+                    $('.filter').append('<th><input type="text" /></th>'); 
+                });
+                //alert($('thead > tr').length);
+            }
+            });
+            
+        
         
         function CreateParamLevel1List(param_name)
         {
@@ -233,43 +298,3 @@ $this->widget('zii.widgets.grid.CGridView', array(
   
 </div>
 
-<?php
- /*
-  $this->widget('ext.yii-jqTree.JQTree', array(
-    'id' => 'tree',
-    'data' => $treeArray,
-    'dragAndDrop' => true,
-    'selectable' => true,
-    'saveState' => true,
-    'autoOpen' => false,
-    'htmlOptions' => array(
-        'class' => 'red',
-        'ondragstart'=>'javascript: alert("drag start")',
-    ),
-    'options'=>array(
-        'onCanMove'=>'js: function(node){
-                if (! node.parent.parent) {
-                    // Example: Cannot move root node
-                    return false;
-                }
-                else {
-                    return true;
-                }
-            }',
-        'onCanMoveTo'=>'js: function(moved_node, target_node, position){
-                if (!target_node) {
-                // Example: can move inside menu, not before or after
-                    return false;
-                }
-                else {
-                    return true;
-                }
-
-            }',
-        
-        
-    ),
-  ));
-*/
-
-?>

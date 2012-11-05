@@ -13,8 +13,9 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
-	 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
-	<!--Theme
+        <!--Theme
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+	
 	<link href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" /> 
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/wijmo/jquery-wijmo.css" /> -->
         
@@ -23,12 +24,12 @@
 	<!--Wijmo Widgets CSS
 	<link href="http://cdn.wijmo.com/jquery.wijmo-complete.all.2.0.0.min.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/wijmo/jquery.wijmo-complete.all.2.0.0.min.css" /> -->
-	<?php Yii::app()->clientScript->registerCssFile(
+	<?php /*Yii::app()->clientScript->registerCssFile(
               Yii::app()->assetManager->publish(
 		Yii::app()->basePath . '/vendors/jqueryui/start/'
                 ).
                 '/jquery-ui.css', 'screen'
-              );
+              );*/
 	?>
 	
  	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -75,6 +76,7 @@
 	        });
 
         </script>
+        <?php /*
         <div style="padding-bottom: 2.5em;width: 100%;border-bottom-style: solid;border-bottom: #000">
             <ul class="sf-menu">
                 <li>
@@ -103,7 +105,7 @@
                     </ul>
                 </li>
             </ul>
-            
+       */ ?>
         <?php /*
         <div id="mainMbMenu">
 		<?php $this->widget('ext.mbmenu.MbMenu',array(
@@ -122,9 +124,9 @@
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest) 
 			), 
 		));  ?>
-        */ ?>
-        </div><!-- mainmenu -->
         
+        </div><!-- mainmenu -->
+        */ ?>
 	<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
 		'links'=>$this->breadcrumbs,
 	));*/ ?><!-- breadcrumbs -->

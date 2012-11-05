@@ -25,7 +25,7 @@
 			}
 			
 	?>
-	<?php	/*$this->widget('zii.widgets.jui.CJuiAccordion', array(
+	<?php	$this->widget('zii.widgets.jui.CJuiAccordion', array(
 					'id'=>'rightPanel',
                     'panels'=>
 					 $panelsArray,
@@ -45,7 +45,7 @@
 	
 			
 			
-		*/	
+			
         ?>
 		</p>
 

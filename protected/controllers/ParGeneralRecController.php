@@ -2,6 +2,7 @@
 
 class ParGeneralRecController extends Controller
 {
+    
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -371,8 +372,7 @@ class ParGeneralRecController extends Controller
             
             if (Yii::app()->request->isAjaxRequest && isset($_GET['param_name']))      
             {
-                
-                
+                   
                 $level1FilterSQL = isset($_GET['level1Filter']) ? "AND param_value LIKE"."'%".$_GET['level1Filter']."%'" : "";
                 $level2SelectedSQL = isset($_GET['level2Selected']) ? "AND sub_param_id=".$_GET['level2Selected'] : "";
                 $param_name = $_GET['param_name'];

@@ -18,6 +18,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+                'application.vendors.*',
 	),
 
 	'modules'=>array(
@@ -43,19 +44,19 @@ return array(
                       'widgets' => array(
                           'CJuiAutoComplete' => array(
                               'themeUrl' => 'protected/vendors/jqueryui',
-                              'theme' => 'start',
+                              'theme' => 'redmond',
                           ),
                           'CJuiDialog' => array(
                               'themeUrl' => 'protected/vendors/jqueryui',
-                              'theme' => 'start',
+                              'theme' => 'redmond',
                           ),
                           'CJuiDatePicker' => array(
                              'themeUrl' => 'protected/vendors/jqueryui',
-                              'theme' => 'start',
+                              'theme' => 'redmond',
                           ),
                           'CJuiAccordion' => array(
                               'themeUrl' => 'protected/vendors/jqueryui',
-                              'theme' => 'start',
+                              'theme' => 'redmond',
                           ),
                       ),
                   ),
