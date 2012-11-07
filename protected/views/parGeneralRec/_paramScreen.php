@@ -61,10 +61,10 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
 	    'scrollable' => true,
 	    'sortable' => true,
 	    'pageable' => true,
-          //  'editable' => true,
+            'editable' => true,
             'selectable' => true,
             'navigatable' => true,
-            'toolbar' => 'js: create',
+            //'toolbar' => array('"create",{name:"save",text:"save"}'),
 	    'columns' => array(
 	    	array(
 	            'field' => "lev2Val",
@@ -102,6 +102,19 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
 <script type="text/javascript">
     $(function() {
         
+        
+        //kendo grid
+        $("#grid").kendoGrid({
+          edit: function(e){
+            alert(e.column);  
+          },
+          toolbar: [
+              //"create",
+              {name: "remove",text:"שמור שינויים" },
+                  
+              
+          ]  
+        });
         $("ul.dragtrue").sortable({
             connetWith: "td"
         });
