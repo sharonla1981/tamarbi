@@ -12,8 +12,15 @@
     
 </style>
 
+<link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.default.min.css" rel="stylesheet">
+<link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.common.min.css" rel="stylesheet"> 
 <?php //indlude the floating div jquery plugin ?>
-<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/js/jquery.floatobject-1.0.js"); ?>
+<?php //Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/js/jquery.floatobject-1.0.js"); ?>
+
+<?php //Yii::app()->clientScript->registerScriptFile("http://cdn.kendostatic.com/2012.2.913/js/jquery.min.js"); ?>
+<?php Yii::app()->clientScript->registerScriptFile("http://cdn.kendostatic.com/2012.2.913/js/kendo.all.min.js"); ?>
+
+
 
 
  
@@ -50,11 +57,23 @@ $level3data = $level3dataProvider->getData();
 			)); */
 ?>
 
-<?php
+<?php 
+/*
 $this->widget('application.vendors.kendoui.widgets.KGrid', array(
-		'dataSource' => array('data'=>$dataP,
-	        
-			'pageSize' => 20,
+		'dataSource' =>array('data'=>$dataP,
+                    array(
+                  'transport'=>
+                        array(
+                        'read'=>'index.php?r=parGeneralRec/kendoGridRead'
+                        ),
+                    'schema'=>array(
+                    //    'data'=>'data',
+                        'id'=>'id',
+                        ),
+                    
+                      
+                          
+			'pageSize' => 10,
 		),
 	    'height' => 360,
 	    'groupable' => true,
@@ -68,44 +87,107 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
 	    'columns' => array(
 	    	array(
 	            'field' => "lev2Val",
-	            'width' => 90,
+	            //'width' => 90,
 	            'title' => $dataP[0]['lev2Title'],
 	        ),
 	    	array(
 	            'field' => "lev1Val",
 	            'width' => 90,
 	            'title' => $dataP[0]['lev1Title'],
-	        ),/*
-	    	array(
-	            'width' => 100,
-	            'field' => 'City',
 	        ),
-	    	array(
-	            'field' => 'Title',
-	        ),
-	    	array(
-	            'field' => 'BirthDate',
-	            'title' => 'Birth Date',
-	            'template' => "#= kendo.toString(BirthDate,'dd MMMM yyyy') #",
-	        ),
-	    	array(
-	            'width' => 50,
-	            'field' => 'Age',
-	        ),*/
 	    ),
 		'htmlOptions' => array('id' => 'grid'),
 	)
-);
+); */
 ?>
 
-
+<div id="grid"></div>
 <script type="text/javascript">
-    $(function() {
-        
-        
+    
+              
+                    
+     $(document).ready(function() {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    
+                    transport: {                
+                        read: {
+                            dataType: "json",
+                            url: "index.php?r=parGeneralRec/kendoGridRead"
+                        } 
+                    },
+                    schema: {
+                        
+                        data: "data",
+                        model: {
+                            id: "id",
+                            fields: {
+                                            //param_name: { type: "string" },
+                                            //param_id: { type: "number" },
+                                            //sub_param_name: { type: "string" },
+                                            sub_param_id: { type: "number" },
+                                            param_value: { type: "string" },
+                                            //start_date: { type: "date" },
+                                            //end_date: { type: "date" },
+                                            id: { type: "number" }
+                                            //param_heb_name: { type: "string" }
+
+
+                                        }
+                            }
+                    },
+                    pageSize: 10
+                },
+                columns: [{
+                                field:"param_value",
+                                filterable: true
+                            },
+                            {
+                                field:"id",
+                                filterable: true,
+                                hidden: true
+                            },
+                            {
+                                field:"sub_param_id",
+                                filterable: true
+                            }
+                ],
+                pageable: true,
+                scrollable: false,
+                sortable: true,
+                filterable: true,
+                toolbar: [//'create'
+                        { name: "create", text: "הוסף" }
+                    ],
+                editable: "popup"
+                
+            });
+
+/*
+        //var params = 
         //kendo grid
         $("#grid").kendoGrid({
-          edit: function(e){
+              dataSource: {
+                    transport: {
+                      read: "index.php?r=parGeneralRec/kendoGridRead"
+                          
+                          //type: "post"
+                      
+                      update: {
+                          url: "index.php?r=parGeneralRec/kendoGridUpdate",
+                          type: "post"
+                      }  
+                    },
+                    schema: {
+                        data: 'data'
+                        model: {
+                            id: 'id'
+                            
+                        }
+                    }
+            },
+          columns:[{field:"param_name"}]
+          /*edit: function(e){
             alert(e.column);  
           },
           toolbar: [
@@ -114,7 +196,7 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
                   
               
           ]  
-        });
+        });*/
         $("ul.dragtrue").sortable({
             connetWith: "td"
         });
@@ -191,7 +273,7 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
             }
         })
         
-        $('thead > tr > th').click(function (){
+        /$/*('thead > tr > th').click(function (){
           
             
             if ($('.filter').length == 0)
@@ -203,7 +285,7 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
                 //alert($('thead > tr').length);
             }
             });
-            
+            */
         
         
         function CreateParamLevel1List(param_name)

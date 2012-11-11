@@ -34,7 +34,7 @@ class ParGeneralRecController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','paramScreen','editbleGrid','getParamAjax','wijTree','getTreeAjax',
-                                    'updateParam','createParamItemListAjax','getParamListAjax'),
+                                    'updateParam','createParamItemListAjax','getParamListAjax','kendoGridUpdate','kendoGridRead'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -429,6 +429,44 @@ class ParGeneralRecController extends Controller
                 
                 echo CJSON::encode($arr);
             }
+            
+        }
+        
+        public function actionKendoGridUpdate()
+        {
+            $update = false;
+            
+            if (Yii::app()->request->isAjaxRequest && isset($_POST['id']) && isset($_POST['lev2ItemId']))
+            {
+                  //$param_name = $_POST['param_name'];
+                 //$lev1TblId = $_POST['lev1TblId'];
+                $id = $_POST['id'];
+                $lev2ItemId = $_POST['lev2ItemId'];
+
+                $model = $this->loadModel($id);
+
+                $model->sub_param_id = $lev2ItemId;
+
+                if($model->save())
+                {
+                    $update = true;
+                }
+            }
+            
+            echo json_encode($update);
+        }
+        
+        public function actionKendoGridRead()
+        {
+            $sql = "Select * from par_general_rec";
+            $dataProvider=new CSqlDataProvider($sql, array(
+				'pagination'=>array(
+						'pageSize'=>1000,
+				),
+		));
+            $data = $dataProvider->getData();
+            
+            echo "{\"data\":" . CJSON::encode($data). "}";
             
         }
 }
