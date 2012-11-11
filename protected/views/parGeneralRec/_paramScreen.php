@@ -10,6 +10,7 @@
     .ui-datepicker { z-index : 1003; }
     input.rounded {font-size: 16px}
     
+    
 </style>
 
 <link href="http://cdn.kendostatic.com/2012.2.913/styles/kendo.default.min.css" rel="stylesheet">
@@ -19,6 +20,7 @@
 
 <?php //Yii::app()->clientScript->registerScriptFile("http://cdn.kendostatic.com/2012.2.913/js/jquery.min.js"); ?>
 <?php Yii::app()->clientScript->registerScriptFile("http://cdn.kendostatic.com/2012.2.913/js/kendo.all.min.js"); ?>
+<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/protected/vendors/kendoui/assets/js/cultures/kendo.culture.he-IL.min.js"); ?>
 
 
 
@@ -107,13 +109,19 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
               
                     
      $(document).ready(function() {
+            kendo.culture("he-IL");
+            var url = window.location.href;
+            var param_name = url.substr(url.search('param_name')+11,url.length-(url.search('param_name')+11-1));
             $("#grid").kendoGrid({
                 dataSource: {
                     
                     transport: {                
                         read: {
                             dataType: "json",
-                            url: "index.php?r=parGeneralRec/kendoGridRead"
+                            url: "index.php?r=parGeneralRec/kendoGridRead",
+                            data: {
+                                param_name: param_name
+                            }
                         } 
                     },
                     schema: {
@@ -122,14 +130,15 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
                         model: {
                             id: "id",
                             fields: {
+                                            
                                             //param_name: { type: "string" },
                                             //param_id: { type: "number" },
                                             //sub_param_name: { type: "string" },
-                                            sub_param_id: { type: "number" },
-                                            param_value: { type: "string" },
+                                            //sub_param_id: { type: "number" },
+                                            //param_value: { type: "string" },
                                             //start_date: { type: "date" },
                                             //end_date: { type: "date" },
-                                            id: { type: "number" }
+                                            //id: { type: "number" }
                                             //param_heb_name: { type: "string" }
 
 

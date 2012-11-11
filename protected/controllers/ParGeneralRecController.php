@@ -458,7 +458,24 @@ class ParGeneralRecController extends Controller
         
         public function actionKendoGridRead()
         {
-            $sql = "Select * from par_general_rec";
+            $param_name = $_GET['param_name'];
+            
+            
+            //get the sub_param heb_name
+            $sub_param_heb_name = Yii::app()->db->createCommand("SELECT DISTINCT param_heb_name FROM `par_general_rec`
+                                  where param_name = (SELECT DISTINCT sub_param_name FROM `par_general_rec`
+                                  where param_name='$param_name')")->queryAll();
+            $sub_param_heb_name = $sub_param_heb_name[0];
+            $sub_param_name = Yii::app()->db->createCommand("SELECT DISTINCT param_name FROM `par_general_rec`
+                                  where param_name = (SELECT DISTINCT sub_param_name FROM `par_general_rec`
+                                  where param_name='$param_name')")->queryAll();
+            $sub_param_name = $sub_param_name[0];
+            $param_heb_name = Yii::app()->db->createCommand("SELECT DISTINCT param_heb_name WHERE param_name='$param_name'")->queryAll();
+            $param_heb_name = $param_heb_name[0];
+            $sql = "SELECT a.id AS id,a.param_value AS $param_heb_name,(SELECT DISTINCT param_value from par_general_rec WHERE param_heb_name = '$sub_param_name' AND param_id=a.sub_param_id) AS '$sub_param_heb_name' 
+                    FROM par_general_rec AS a
+                    WHERE a.param_name='$param_name'";
+            
             $dataProvider=new CSqlDataProvider($sql, array(
 				'pagination'=>array(
 						'pageSize'=>1000,
