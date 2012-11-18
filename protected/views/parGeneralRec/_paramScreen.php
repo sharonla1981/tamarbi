@@ -103,7 +103,19 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
 ); */
 ?>
 
-<div id="grid"></div>
+<!--<div id="grid"></div> -->
+<table id="grid">
+    <thead>
+        <tr>
+            <th data-field="lev2Param" style="text-align: right; direction: rtl;"><?php echo $dataP[0]['lev2Title']; ?></th>
+            <th data-field="lev1Param" style="text-align: right; direction: rtl;"><?php echo $dataP[0]['lev1Title']; ?></th>
+        </tr>
+    </thead>    
+</table>
+
+<div id="edit-popup">
+    
+</div>
 <script type="text/javascript">
     
               
@@ -114,7 +126,7 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
             var param_name = url.substr(url.search('param_name')+11,url.length-(url.search('param_name')+11-1));
             $("#grid").kendoGrid({
                 dataSource: {
-                    
+                    autoSync: true,
                     transport: {                
                         read: {
                             dataType: "json",
@@ -122,34 +134,40 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
                             data: {
                                 param_name: param_name
                             }
-                        } 
-                    },
-                    schema: {
-                        
-                        data: "data",
-                        model: {
-                            id: "id",
-                            fields: {
-                                            
-                                            //param_name: { type: "string" },
-                                            //param_id: { type: "number" },
-                                            //sub_param_name: { type: "string" },
-                                            //sub_param_id: { type: "number" },
-                                            //param_value: { type: "string" },
-                                            //start_date: { type: "date" },
-                                            //end_date: { type: "date" },
-                                            //id: { type: "number" }
-                                            //param_heb_name: { type: "string" }
-
-
-                                        }
+                        },
+                        update: {
+                                type: "POST",
+                                url: "index.php?r=parGeneralRec/kendoGridUpdate",
+                                success: function(e){
+                                    alert(e);
+                                    //$("#grid").data("KendoGrid").dataSource.read();
+                                },
+                                error: function(e){
+                                    alert(e);
+                                }
                             }
                     },
-                    pageSize: 10
+                    schema: {  
+                        data: "data",
+                        total: "total",
+                        model: {
+                            id: "id",
+                            fields: {                                            
+                                        lev1Param: { type: "string" },
+                                        lev2Param: { type: "string", editable: false }
+                                 }
+                            }
+                    },
+                    pageSize: 10,
+                    batch: true
                 },
                 columns: [{
-                                field:"param_value",
-                                filterable: true
+                                field:"lev1Param",
+                                filterable: true,
+                                attributes: {
+                                  style: "text-align: right"  
+                                },
+                                editor: lev2ComboBox
                             },
                             {
                                 field:"id",
@@ -157,55 +175,63 @@ $this->widget('application.vendors.kendoui.widgets.KGrid', array(
                                 hidden: true
                             },
                             {
-                                field:"sub_param_id",
-                                filterable: true
-                            }
+                                field:"lev2Param",
+                                filterable: true,
+                                attributes: {
+                                  style: "text-align: right"  
+                                }
+                            }/*,
+                            {
+                                command: [{name: "edit", text:"עריכה"}],title:"&nbsp;"
+                            }*/
                 ],
                 pageable: true,
                 scrollable: false,
                 sortable: true,
-                filterable: true,
+                //filterable: true,
                 toolbar: [//'create'
                         { name: "create", text: "הוסף" }
                     ],
-                editable: "popup"
+                editable: true//{mode: "inline" /*,template:$("#edit-popup")*/ }
+                
                 
             });
-
-/*
-        //var params = 
-        //kendo grid
-        $("#grid").kendoGrid({
-              dataSource: {
-                    transport: {
-                      read: "index.php?r=parGeneralRec/kendoGridRead"
-                          
-                          //type: "post"
-                      
-                      update: {
-                          url: "index.php?r=parGeneralRec/kendoGridUpdate",
-                          type: "post"
-                      }  
-                    },
-                    schema: {
-                        data: 'data'
-                        model: {
-                            id: 'id'
+            
+            //create a comboBox for the grid field On edit or On create
+            function lev2ComboBox(container,options){
+            
+            var grid = $("#grid").data("kendoGrid");
+            
+                $('<input data-bind="value:' + options.field + '"/>')
+                .appendTo(container)
+                .kendoComboBox({
+                    placeholder: "התחל להקליד",
+                    dataTextField: "param_value",
+                    dataValueField: "param_id",
+                    filter: "contains",
+                    autoBind: false,
+                    dataSource: {
+                        pageSize: 20,
+                        transport: {
+                            read: {
+                                dataType: "json",
+                                url: "index.php?r=parGeneralRec/kendoGridRead1",
+                                data: {
+                                    param_name: param_name
+                                }
+                            }
                             
+                        },
+                        schema:{
+                            data: "data"
                         }
+                    },
+                    change: function(e){
+                        $("#grid").data("kendoGrid").dataSource.read();
                     }
-            },
-          columns:[{field:"param_name"}]
-          /*edit: function(e){
-            alert(e.column);  
-          },
-          toolbar: [
-              //"create",
-              {name: "remove",text:"שמור שינויים" },
-                  
-              
-          ]  
-        });*/
+                });
+         }
+         
         $("ul.dragtrue").sortable({
             connetWith: "td"
         });

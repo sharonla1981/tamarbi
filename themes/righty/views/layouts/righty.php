@@ -48,6 +48,15 @@
 			
         ?>
 		</p>
+                <hr />
+                <?php 
+                        //check if a param exists in the current url
+                        if(strpos(Yii::app()->request->url,'&') != null && Yii::app()->controller->id == 'parGeneralRec')
+                        {
+                            echo $this->renderPartial('_filterPane',null,true);
+                        }
+                
+                ?>
 
     </div>
 

@@ -34,7 +34,7 @@ class ParGeneralRecController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','paramScreen','editbleGrid','getParamAjax','wijTree','getTreeAjax',
-                                    'updateParam','createParamItemListAjax','getParamListAjax','kendoGridUpdate','kendoGridRead'),
+                                    'updateParam','createParamItemListAjax','getParamListAjax','kendoGridUpdate','kendoGridRead','kendoGridRead1'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -435,13 +435,14 @@ class ParGeneralRecController extends Controller
         public function actionKendoGridUpdate()
         {
             $update = false;
+            $id = null;
             
-            if (Yii::app()->request->isAjaxRequest && isset($_POST['id']) && isset($_POST['lev2ItemId']))
+            if (Yii::app()->request->isAjaxRequest && isset($_POST['models'][0]['id']) && isset($_POST['models'][0]['lev1Param']))
             {
                   //$param_name = $_POST['param_name'];
                  //$lev1TblId = $_POST['lev1TblId'];
-                $id = $_POST['id'];
-                $lev2ItemId = $_POST['lev2ItemId'];
+                $id = $_POST['models'][0]['id'];
+                $lev2ItemId = $_POST['models'][0]['lev1Param'];
 
                 $model = $this->loadModel($id);
 
@@ -453,7 +454,7 @@ class ParGeneralRecController extends Controller
                 }
             }
             
-            echo json_encode($update);
+            echo $id;
         }
         
         public function actionKendoGridRead()
@@ -462,19 +463,47 @@ class ParGeneralRecController extends Controller
             
             
             //get the sub_param heb_name
-            $sub_param_heb_name = Yii::app()->db->createCommand("SELECT DISTINCT param_heb_name FROM `par_general_rec`
-                                  where param_name = (SELECT DISTINCT sub_param_name FROM `par_general_rec`
-                                  where param_name='$param_name')")->queryAll();
-            $sub_param_heb_name = $sub_param_heb_name[0];
             $sub_param_name = Yii::app()->db->createCommand("SELECT DISTINCT param_name FROM `par_general_rec`
                                   where param_name = (SELECT DISTINCT sub_param_name FROM `par_general_rec`
-                                  where param_name='$param_name')")->queryAll();
-            $sub_param_name = $sub_param_name[0];
-            $param_heb_name = Yii::app()->db->createCommand("SELECT DISTINCT param_heb_name WHERE param_name='$param_name'")->queryAll();
-            $param_heb_name = $param_heb_name[0];
-            $sql = "SELECT a.id AS id,a.param_value AS $param_heb_name,(SELECT DISTINCT param_value from par_general_rec WHERE param_heb_name = '$sub_param_name' AND param_id=a.sub_param_id) AS '$sub_param_heb_name' 
+                                  where NOT ISNULL(sub_param_name)
+                                  AND param_name='$param_name')")->queryAll();
+            $sub_param_name = $sub_param_name[0]['param_name'];
+            
+            $sql = "SELECT a.id AS id,a.param_value AS 'lev2Param',
+                    (SELECT DISTINCT param_value from par_general_rec WHERE param_name='$sub_param_name' AND param_id=a.sub_param_id) AS 'lev1Param'
                     FROM par_general_rec AS a
                     WHERE a.param_name='$param_name'";
+            
+            $dataProvider=new CSqlDataProvider($sql, array(
+				'pagination'=>array(
+						'pageSize'=>1000,
+				),
+                
+		));
+            $data = $dataProvider->getData();
+            
+            //$result = "{\"data\":" . CJSON::encode($data).",{\"total\":[{"."\"total\":".count($data). "}]";
+            //$result.= "{\"total\":[" . CJSON::encode(count($data)). "]}";
+            
+            echo "{\"data\":" . CJSON::encode($data). "}";
+            //echo $result;
+            
+        }
+        
+        public function actionKendoGridRead1()
+        {
+            $param_name = $_GET['param_name'];
+            
+            
+            //get the sub_param heb_name
+            $sub_param_name = Yii::app()->db->createCommand("SELECT DISTINCT param_name FROM `par_general_rec`
+                                  where param_name = (SELECT DISTINCT sub_param_name FROM `par_general_rec`
+                                  where NOT ISNULL(sub_param_name)
+                                  AND param_name='$param_name')")->queryAll();
+            $sub_param_name = $sub_param_name[0]['param_name'];
+            
+            $sql = "SELECT DISTINCT param_id,param_value FROM `par_general_rec`
+                    WHERE param_name = '$sub_param_name'";
             
             $dataProvider=new CSqlDataProvider($sql, array(
 				'pagination'=>array(
@@ -486,4 +515,6 @@ class ParGeneralRecController extends Controller
             echo "{\"data\":" . CJSON::encode($data). "}";
             
         }
+        
+
 }
